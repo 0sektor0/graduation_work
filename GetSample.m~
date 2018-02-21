@@ -1,0 +1,9 @@
+function [sample] = GetSample(vector_source, offset, count)
+    
+    sample_end = offset + count - 1;
+    
+    if sample_end > length(vector)
+    
+    sample = vector_source(offset : sample_end);
+    
+end
