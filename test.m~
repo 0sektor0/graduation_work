@@ -1,5 +1,0 @@
-load data vector_source;
-vector_sample = GetSample(vector_source, 1, 3);
-disp(vector_sample);
-
-length(vector_sample)
