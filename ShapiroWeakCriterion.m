@@ -1,3 +1,4 @@
+% 8<= n <= 50
 function IsNormal = ShapiroWeakCriterion(sample) %для alpha = 0.05
     %расчет параметров для вычисления статистики W
     n = length(sample); 
