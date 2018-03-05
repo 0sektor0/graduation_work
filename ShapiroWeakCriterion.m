@@ -1,11 +1,11 @@
 % 8<= n <= 50
-function IsNormal = ShapiroWeakCriterion(sample) %для alpha = 0.05
+function IsNormal = ShapiroWeakCriterion(Xj) %для alpha = 0.05
     %расчет параметров для вычисления статистики W
-    n = length(sample); 
+    n = length(Xj); 
     m = n/2; 
-    xavg = mean(sample);
+    Xcp = mean(Xj);
         
-    x = fliplr(sample); 
+    x = fliplr(Xj); 
     k = 1:m; 
     zk = (n-2.*k+1) / (n-0.5); 
     
@@ -13,8 +13,8 @@ function IsNormal = ShapiroWeakCriterion(sample) %для alpha = 0.05
     ak = a0.*(zk + 1483./(3-zk).^10.845 + 71.6*10^-10./(1.1-zk).^8.26); 
     
     %расчет статистики
-    b=sum(ak.*(x(1:m)-sample(1:m))).^2;
-    s2 = sum((sample-xavg).^2); 
+    b=sum(ak.*(x(1:m)-Xj(1:m))).^2;
+    s2 = sum((Xj-Xcp).^2); 
     w = (1-0.6695 / n^0.6518) * s2/b;
 
     if(w < 1)

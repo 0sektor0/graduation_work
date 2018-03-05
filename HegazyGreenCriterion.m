@@ -1,20 +1,20 @@
-function IsNormal = HegazyGreenCriterion(sample, alpha)
+function IsNormal = HegazyGreenCriterion(Xj, alpha)
     %проверка на наличие известной апроксимации критических величин
     if ~(alpha == 0.01 || alpha == 0.05)
         error("invalid parametr alpha")
     end
     
     %расчет параметров для вычисления статистик T1 и T2 
-    xavg = mean(sample);
-    n = length(sample);
+    Xcp = mean(Xj);
+    n = length(Xj);
     
-    s = (sample - xavg);
+    s = (Xj - Xcp);
     s =  sqrt(sum(s .* s) / (n - 1));
     
-    z = (sample - xavg) / s;
+    z = (Xj - Xcp) / s;
     
     %вектор мат ожидания порядковой статистики 
-    nu(1 : n) = 0;
+    nu = zeros(1, n);
     %надо заменить на более изящную конструкцию
     for i = 1 : n
         buf = n + 1;
@@ -27,6 +27,9 @@ function IsNormal = HegazyGreenCriterion(sample, alpha)
     t2 = sum(buf .* buf) / n;
 
     %расчет критических значений в соответствие с известными апроксимациями
+    t1_crit = 0;
+    t2_crit = 0;
+    
     if alpha == 0.01
         t1_crit = 0.7195 - 0.1751 * log(n) + 0.0108 * log(n)^2;
         t2_crit = 0.0178 + 2.8736/n - 8.2894/n^2;

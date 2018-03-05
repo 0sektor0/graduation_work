@@ -1,0 +1,22 @@
+<html>
+<body>
+<script src="resources/eml_report_loadable_data.js"></script>
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="57,1" id="srcline1"> 1</a></span><span class="line"><span class="keyword">function</span> [<span class="var type1" id="S2T2U3">sample</span>] = GetSample(<span class="var type1" id="S3T2U6">vector_source</span>, <span class="var type1" id="S4T38U7">offset</span>, <span class="var type1" id="S5T38U8">count</span>)    </span></span>
+<span class="srcline"><span class="lineno"><a href="57,2" id="srcline2"> 2</a></span><span class="line">    </span></span>
+<span class="srcline"><span class="lineno"><a href="57,3" id="srcline3"> 3</a></span><span class="line">    <span class="keyword">if</span> <span class="mxinfo " id="T1:U5"><span class="var type1" id="S4T38U12">offset</span> &lt;= <span class="mxinfo " id="T3:U7">0</span></span></span></span>
+<span class="srcline"><span class="lineno"><a href="57,4" id="srcline4"> 4</a></span><span class="line">        error(<span class="mxinfo " id="T39:U8"><span class="string">"out of range"</span></span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="57,5" id="srcline5"> 5</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="57,6" id="srcline6"> 6</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="57,7" id="srcline7"> 7</a></span><span class="line">    <span class="mxinfo " id="T38:U9"><span class="var type1" id="S7T38U20">sample_end</span> = <span class="mxinfo " id="T38:U11"><span class="mxinfo " id="T38:U12"><span class="var type1" id="S4T38U23">offset</span> + <span class="var type1" id="S5T38U24">count</span></span> - <span class="mxinfo " id="T3:U15">1</span></span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="57,8" id="srcline8"> 8</a></span><span class="line">    </span></span>
+<span class="srcline"><span class="lineno"><a href="57,9" id="srcline9"> 9</a></span><span class="line">    <span class="keyword">if</span> <span class="mxinfo " id="T1:U16"><span class="var type1" id="S7T38U29">sample_end</span> &gt; <span class="mxinfo " id="T3:U18">length(<span class="var type1" id="S3T2U32">vector_source</span>)</span></span></span></span>
+<span class="srcline"><span class="lineno"><a href="57,10" id="srcline10">10</a></span><span class="line">        error(<span class="mxinfo " id="T39:U20"><span class="string">"out of range"</span></span>);</span></span>
+<span class="srcline"><span class="lineno"><a href="57,11" id="srcline11">11</a></span><span class="line">    <span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="57,12" id="srcline12">12</a></span><span class="line">    </span></span>
+<span class="srcline"><span class="lineno"><a href="57,13" id="srcline13">13</a></span><span class="line">    <span class="mxinfo " id="T2:U21"><span class="var type1" id="S2T2U39">sample</span> = <span class="mxinfo " id="T2:U23"><span class="var type1" id="S3T2U41">vector_source</span>(<span class="mxinfo " id="T40:U25"><span class="var type1" id="S4T38U43">offset</span> : <span class="var type1" id="S7T38U44">sample_end</span></span>)</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="57,14" id="srcline14">14</a></span><span class="line">    </span></span>
+<span class="srcline"><span class="lineno"><a href="57,15" id="srcline15">15</a></span><span class="line"><span class="keyword">end</span></span></span>
+</pre>
+</body>
+</html>

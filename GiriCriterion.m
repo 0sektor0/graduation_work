@@ -1,13 +1,13 @@
-function IsNormal = GiriCriterion(sample, alpha)
+function IsNormal = GiriCriterion(Xj, alpha)
     %проверка на наличие известной апроксимации критических величин
     if ~(alpha == 0.05)
         error("invalid parametr alpha")
     end
     
     %расчет параметров, необходимых для дальнейших вычмслений
-    xavg = mean(sample);
-    n = length(sample);
-    dsa = sample - xavg; %the Difference of the Sample and its Average. DSA 
+    Xcp = mean(Xj);
+    n = length(Xj);
+    dsa = Xj - Xcp; %the Difference of the Sample and its Average. DSA 
       
     %расчет статистики
     s =  sqrt(sum(dsa .* dsa)) / (n - 1);    
@@ -18,6 +18,7 @@ function IsNormal = GiriCriterion(sample, alpha)
     disp = 0.045070/n - 0.124648/n^2 + 0.084859/n^3 + 0.006323/n^4;
     
     %определене квантиля норм распределения заданного уровня
+    u = 0;
     if alpha == 0.05
         u = 1.645; %альфа квантиль стд нормального распределения уровня значимости 0.05 
     end

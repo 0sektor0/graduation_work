@@ -4,7 +4,7 @@
 %example = [0, 0, 0, 0, 0, 0];
 Xj = [4.9, 5.0, 6.5, 10.9, 11.0, 11.4, 12.7, 13.1, 14.0, 14.5];
 
-vector_source = rand(1, 100);
+vector_source = rand(1, 50);
 vector_source = vector_source + abs(min(vector_source));
 n = length(vector_source);
 
@@ -12,10 +12,9 @@ n = length(vector_source);
 vector_source = vector_source + max(vector_source);
 vector_source = boxcox(vector_source')';
 
-t = CheckNormality(vector_source)
-normal_vector = boxcox(vector_source')';
-t = CheckNormality(normal_vector);
+t = ShapiroWeakCriterion(vector_source);
+t = t || HegazyGreenCriterion(vector_source, 0.05);
+t = t || GiriCriterion(vector_source, 0.05);
+t = t || EppsPallyCriterion(vector_source, 0.05)
 
-m = 1 + 3.322*log10(n);
-m=round(m);
-histfit(normal_vector, m);
+ShowPlot(vector_source);
