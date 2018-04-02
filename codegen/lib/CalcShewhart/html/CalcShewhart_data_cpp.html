@@ -1,0 +1,88 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>RTW Report - CalcShewhart_data.cpp</title>
+<script language="JavaScript" type="text/javascript" src="rtwreport_utils.js"></script>
+<script src="resources/eml_report_loadable_data.js"></script>
+</head>
+<body bgcolor="#eeeeee" onload="try {if (top) { if (top.rtwFileOnLoad) top.rtwFileOnLoad(window.document); else local_onload();}} catch(err) {};">
+<p>
+<table border="0" cellspacing="0" cellpadding="6" width="100%%" height="100%%"><tr><td width="100%%" valign="top" bgcolor="#ffffff">
+<h4>File: <a href="../CalcShewhart_data.cpp" target="rtwreport_document_frame" id="linkToText_plain">CalcShewhart_data.cpp</a></h4>
+<pre id="RTWcode">
+<a name="1"><font color="#888888 "><i>    1   </i></font></a><font color="#117755"><i>//</i></font>
+<a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><i>// File: CalcShewhart_data.cpp</i></font>
+<a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><i>//</i></font>
+<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><i>// MATLAB Coder version            : 3.4</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><i>// C/C++ source code generated on  : 20-Mar-2018 12:35:48</i></font>
+<a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><i>//</i></font>
+<a name="7"><font color="#888888 "><i>    7   </i></font></a>
+<a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><i>// Include Files</i></font>
+<a name="9"><font color="#888888 "><i>    9   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;rt_nonfinite.h&quot;</font>
+<a name="10"><font color="#888888 "><i>   10   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;CalcShewhart.h&quot;</font>
+<a name="11"><font color="#888888 "><i>   11   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;EppsPallyCriterion.h&quot;</font>
+<a name="12"><font color="#888888 "><i>   12   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;GetSample.h&quot;</font>
+<a name="13"><font color="#888888 "><i>   13   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;GiriCriterion.h&quot;</font>
+<a name="14"><font color="#888888 "><i>   14   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;HegazyGreenCriterion.h&quot;</font>
+<a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;MakeMultipleNNPredicions.h&quot;</font>
+<a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;ShapiroWeakCriterion.h&quot;</font>
+<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;SimulateNarxNetwork.h&quot;</font>
+<a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;CalcShewhart_data.h&quot;</font>
+<a name="19"><font color="#888888 "><i>   19   </i></font></a>
+<a name="20"><font color="#888888 "><i>   20   </i></font></a><font color="#117755"><i>// Variable Definitions</i></font>
+<a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> <a name="var_dv0">dv0</a>[50] = <b>{</b> 0.061118274114390067, 0.45245729087246855,
+<a name="22"><font color="#888888 "><i>   22   </i></font></a>  0.06499820776456669, -0.77623308042818207, -0.18375679513183668,
+<a name="23"><font color="#888888 "><i>   23   </i></font></a>  0.35575413907207259, -0.0310540317018684, -0.37954870166977434,
+<a name="24"><font color="#888888 "><i>   24   </i></font></a>  0.74836593250336136, 0.80988420411757134, 0.829849704904656,
+<a name="25"><font color="#888888 "><i>   25   </i></font></a>  -0.17884640298788379, 0.10205876785931219, 0.61855950507032731,
+<a name="26"><font color="#888888 "><i>   26   </i></font></a>  0.79873441213675378, 0.44635436329409817, -0.70233273371579374,
+<a name="27"><font color="#888888 "><i>   27   </i></font></a>  0.17579939418324625, -0.92172594699906729, -0.14680215324128654,
+<a name="28"><font color="#888888 "><i>   28   </i></font></a>  0.37370421384758468, 0.80476647981130878, 0.60539502572113679,
+<a name="29"><font color="#888888 "><i>   29   </i></font></a>  -0.052556936312140611, 0.46134689481393693, -0.16275726759675654,
+<a name="30"><font color="#888888 "><i>   30   </i></font></a>  0.83740650216391566, 0.82084738939122637, 0.63475361457385315,
+<a name="31"><font color="#888888 "><i>   31   </i></font></a>  -0.19175535558190129, -0.15875173421608405, -0.40976660375266277,
+<a name="32"><font color="#888888 "><i>   32   </i></font></a>  0.54300672037422426, 0.59196247108706868, 0.78759242653206218,
+<a name="33"><font color="#888888 "><i>   33   </i></font></a>  0.23238495186979111, 0.046342999217160077, -0.53515672416150284,
+<a name="34"><font color="#888888 "><i>   34   </i></font></a>  0.7182607164819621, -0.058057948077309747, -0.78490825315753976,
+<a name="35"><font color="#888888 "><i>   35   </i></font></a>  0.73545036441467238, 0.49148973155308195, 0.56947784560221326,
+<a name="36"><font color="#888888 "><i>   36   </i></font></a>  -0.448655589351279, 0.56026273558967632, 0.1531253928657019,
+<a name="37"><font color="#888888 "><i>   37   </i></font></a>  -0.50444865429346775, -0.22617740060867175, -0.45708782008073551 <b>}</b>;
+<a name="38"><font color="#888888 "><i>   38   </i></font></a>
+<a name="39"><font color="#888888 "><i>   39   </i></font></a><font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> <a name="var_dv1">dv1</a>[10] = <b>{</b> 0.227912320265216, 0.3562975104828735,
+<a name="40"><font color="#888888 "><i>   40   </i></font></a>  0.0016997302229618191, -0.10321879935706216, 0.011173329077173059,
+<a name="41"><font color="#888888 "><i>   41   </i></font></a>  -1.3330986659522588, 1.0280049070402815, -0.6329336615435307,
+<a name="42"><font color="#888888 "><i>   42   </i></font></a>  -0.29979747055028638, 0.37390326576799848 <b>}</b>;
+<a name="43"><font color="#888888 "><i>   43   </i></font></a>
+<a name="44"><font color="#888888 "><i>   44   </i></font></a><font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> <a name="var_dv2">dv2</a>[10] = <b>{</b> -1.3922910334749807, -1.2243227026298271,
+<a name="45"><font color="#888888 "><i>   45   </i></font></a>  -1.1616434113591667, 0.67333631182990639, 0.16568973433063081,
+<a name="46"><font color="#888888 "><i>   46   </i></font></a>  -0.21123017491985102, 0.26311886693415992, -0.87640070521585856,
+<a name="47"><font color="#888888 "><i>   47   </i></font></a>  1.4094979073865546, 1.7429300475993963 <b>}</b>;
+<a name="48"><font color="#888888 "><i>   48   </i></font></a>
+<a name="49"><font color="#888888 "><i>   49   </i></font></a><font color="#112266"><b>const</b></font> <font color="#112266"><b>double</b></font> <a name="var_dv3">dv3</a>[50] = <b>{</b> 0.48007240060049333, -0.32655555053651469,
+<a name="50"><font color="#888888 "><i>   50   </i></font></a>  0.80575443384963608, 0.58544393706798292, -0.31021171446756912,
+<a name="51"><font color="#888888 "><i>   51   </i></font></a>  -0.057709205351858105, 0.3517819352048539, 0.33339735350153493,
+<a name="52"><font color="#888888 "><i>   52   </i></font></a>  0.09647395799162406, 0.24100105249987525, -0.50577944426525867,
+<a name="53"><font color="#888888 "><i>   53   </i></font></a>  -0.026470156442869153, 0.38235123028352996, 0.660296017327714,
+<a name="54"><font color="#888888 "><i>   54   </i></font></a>  0.36176753800464767, -1.2496335893106432, 0.28351044798211489,
+<a name="55"><font color="#888888 "><i>   55   </i></font></a>  -0.26664420612800932, -0.22380988865279541, -0.79424037432398786,
+<a name="56"><font color="#888888 "><i>   56   </i></font></a>  0.74243581436767869, -0.262809117620158, -0.7014282632380836,
+<a name="57"><font color="#888888 "><i>   57   </i></font></a>  -0.26797218750834256, -0.31053007116776843, 0.13455419846262481,
+<a name="58"><font color="#888888 "><i>   58   </i></font></a>  0.025107752649021688, -0.26429502651768755, -0.28684262815962386,
+<a name="59"><font color="#888888 "><i>   59   </i></font></a>  0.097792315813590019, 0.34981797347828991, 0.83503738209305189,
+<a name="60"><font color="#888888 "><i>   60   </i></font></a>  0.40021028762755889, -0.19389039268654384, 0.610735377099027,
+<a name="61"><font color="#888888 "><i>   61   </i></font></a>  -0.88581854010554228, -1.0292477683266568, -0.7205548457000418,
+<a name="62"><font color="#888888 "><i>   62   </i></font></a>  -0.72864634459582378, -0.33734056504732179, -0.54753566571526457,
+<a name="63"><font color="#888888 "><i>   63   </i></font></a>  -0.823614236843807, -0.023251768225536495, -0.72563051376941334,
+<a name="64"><font color="#888888 "><i>   64   </i></font></a>  -0.73806147067274319, 0.41872332846062688, 0.57982720873662252,
+<a name="65"><font color="#888888 "><i>   65   </i></font></a>  0.87255553506833861, 0.0779340548878843, 1.1722430098942052 <b>}</b>;
+<a name="66"><font color="#888888 "><i>   66   </i></font></a>
+<a name="67"><font color="#888888 "><i>   67   </i></font></a><font color="#117755"><i>//</i></font>
+<a name="68"><font color="#888888 "><i>   68   </i></font></a><font color="#117755"><i>// File trailer for CalcShewhart_data.cpp</i></font>
+<a name="69"><font color="#888888 "><i>   69   </i></font></a><font color="#117755"><i>//</i></font>
+<a name="70"><font color="#888888 "><i>   70   </i></font></a><font color="#117755"><i>// [EOF]</i></font>
+<a name="71"><font color="#888888 "><i>   71   </i></font></a><font color="#117755"><i>//</i></font>
+<a name="72"><font color="#888888 "><i>   72   </i></font></a></pre>
+</td></tr></table>
+</p>
+</body>
+</html>
