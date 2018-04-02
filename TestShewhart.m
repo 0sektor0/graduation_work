@@ -1,7 +1,8 @@
 %Xj = [4.9, 5.0, 6.5, 10.9, 11.0, 11.4, 12.7, 13.1, 14.0, 14.5];
 Xj = rand(1, 500);
 
-[Xucl, Xcl, Xlcl, Rucl, Rcl, Rlcl] = CalcShewhart(Xj)
+%[Xucl, Xcl, Xlcl, Rucl, Rcl, Rlcl] = ShewhartInd(Xj);
+[Xucl, Xcl, Xlcl, Rucl, Rcl, Rlcl] = ShewhartIndP(0.6, 0.3);
 
 n = length(Xj);
 YR = abs(Xj(1:n-1) - Xj(2:n));
