@@ -1,5 +1,9 @@
 % 8<= n <= 50
 function IsNormal = ShapiroWeakCriterion(Xj) %для alpha = 0.05
+    if size(Xj, 1) ~= 1
+        error('size mismatch')
+    end
+
     %расчет параметров для вычисления статистики W
     n = length(Xj); 
     m = n/2; 
@@ -13,6 +17,7 @@ function IsNormal = ShapiroWeakCriterion(Xj) %для alpha = 0.05
     ak = a0.*(zk + 1483./(3-zk).^10.845 + 71.6*10^-10./(1.1-zk).^8.26); 
     
     %расчет статистики
+    m = floor(m);
     b=sum(ak.*(x(1:m)-Xj(1:m))).^2;
     s2 = sum((Xj-Xcp).^2); 
     w = (1-0.6695 / n^0.6518) * s2/b;

@@ -1,5 +1,9 @@
 % n >= 8
 function IsNormal = EppsPallyCriterion(Xj, alpha)
+   if size(Xj, 1) ~= 1
+        error('size mismatch')
+    end 
+    
     n = length(Xj);
     
     %проверка на возможность применения критерия

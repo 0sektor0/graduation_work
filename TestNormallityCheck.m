@@ -1,9 +1,9 @@
 wa = 0;
-tc = 1005;  %tests num
+tc = 605;  %tests num
 ts = 5;     %tests start value
 
 for i=ts:tc
-
+    i
     Xjn = randn(1, i);
 
     tsw = ShapiroWeakCriterion(Xjn);

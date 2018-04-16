@@ -1,4 +1,8 @@
 function IsNormal = GiriCriterion(Xj, alpha)
+    if size(Xj, 1) ~= 1
+        error('size mismatch')
+    end 
+    
     %проверка на наличие известной апроксимации критических величин
     if ~(alpha == 0.05)
         error("invalid parametr alpha")

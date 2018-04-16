@@ -1,5 +1,5 @@
-sl = 60;       %sample length 50
-offset = 140;   %50  
+sl = 50;       %sample length 50
+offset = 50;   %50  
 
 %считываем временной ряд
 fData = fopen('data/MFON_160101_180101_F.txt');
