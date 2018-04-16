@@ -1,5 +1,7 @@
 function [is_true, num] = SRcriterian4(Xj)
     n = length(Xj);
+    is_true = false;
+    num = -1;
 
     for i = 1:n-13
         last_state = 0;
