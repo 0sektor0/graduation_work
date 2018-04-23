@@ -1,18 +1,18 @@
-function prediction = MakeNpredictions(input, predictions_count, delay)
+function prediction = MakeNpredictions(input, pcount)
   
-if length(input) < delay+1
+size = 10;
+n = length(input);
+if n < size+1
     error("size mismatch");
 end
 
-predictions_count = predictions_count + delay + 1;
-prediction = zeros(1, predictions_count);
-prediction(1: delay+1) = input(1: delay+1);
+input = input(n-size+1:n);
+prediction = zeros(1,pcount);
 
-for i =1 : predictions_count-delay+1
-inp_delay = prediction(i : i+delay-1);
-out_delay = prediction(i+1 : i+delay);
-
-prediction(1, i+delay+1) = SimulateNarxNetwork(0, 0, inp_delay, out_delay);
+for i=1:pcount
+    prediction(i)=Nio2(input');
+    input(1:size-1)=input(2:size);
+    input(size)=prediction(1,i);
 end
 
 end

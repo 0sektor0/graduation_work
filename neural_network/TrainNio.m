@@ -1,12 +1,4 @@
-fData = fopen('data/MFON_160101_180101_F.txt');
-if fData==-1
-    error('file does not exist');
-end
-while feof(fData) == 0
-    line = fgetl(fData);
-    data = str2num(line);
-end
-
+data = LoadData();
 D = num2cell(data);
 n = length(data);
 data = data(2:n) - data(1:n-1);
@@ -29,15 +21,15 @@ net = network( ...
 );
 
 % number of hidden layer neurons
-net.layers{1}.size = 5;
+net.layers{1}.size = 50;
 % hidden layer transfer function
-net.layers{1}.transferFcn = 'logsig';
+net.layers{1}.transferFcn = 'tansig';
 
 net = configure(net,inputs,outputs);
 view(net);
 
 % network training
-net.trainFcn = 'traingdm';
+net.trainFcn = 'trainlm';
 net.performFcn = 'mse';
 
 net.divideFcn = 'dividerand';  % Divide data randomly
@@ -45,7 +37,7 @@ net.divideMode = 'time';  % Divide up every sample
 
 net.trainParam.goal = 1e-10;
 net.trainParam.epochs = 100000;
-net.trainParam.min_grad = 1e-10;
+net.trainParam.min_grad = 0;
 net.trainParam.max_fail = 1000;
 
 net.divideParam.trainRatio = 70/100;

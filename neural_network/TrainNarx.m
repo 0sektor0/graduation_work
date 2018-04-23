@@ -1,12 +1,4 @@
-fData = fopen('data/MFON_160101_180101_F.txt');
-if fData==-1
-    error('file does not exist');
-end
-while feof(fData) == 0
-    line = fgetl(fData);
-    data = str2num(line);
-end
-
+data = LoadData();
 %data preparation
 D = num2cell(data);
 X = D(1:4000);
