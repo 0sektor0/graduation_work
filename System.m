@@ -6,7 +6,10 @@ ofs = 472;
 %ofs = 452;
 Xj = data(ofs:ofs-1+sl);
 
+
 sr = [];
-[st,preds,nsr] = ProcessTs(Xj,20,sr,10);
-[st,preds,nsr] = ProcessTs(Xj,20,nsr,10);
-a=1;
+[st,preds,nsr] = ProcessTs(Xj,2000,sr,10);
+%[st,preds,nsr] = ProcessTs(Xj,20,nsr,10);
+
+TS = length(preds)-1;
+plot(ofs:ofs+TS,preds,1:n,data)

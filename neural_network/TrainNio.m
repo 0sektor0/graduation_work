@@ -1,7 +1,7 @@
 data = LoadData();
 D = num2cell(data);
 n = length(data);
-data = data(2:n) - data(1:n-1);
+%data = data(2:n) - data(1:n-1);
 
 [X,T] = SplitData(data(1:1000),10);
 X = tonndata(X,true,true);
