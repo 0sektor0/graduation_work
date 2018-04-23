@@ -1,42 +1,69 @@
 addpath('./noramality_criterians', './shewhart_map', './shewhart_map/special_reasons', './neural_network', './data', './tests')
 
 
-X = num2cell(nn_inp);
-T = num2cell(nn_out);
 
-% Choose a Training Function
-% For a list of all training functions type: help nntrain
-% 'trainlm' is usually fastest.
-% 'trainbr' takes longer but may be better for challenging problems.
-% 'trainscg' uses less memory. Suitable in low memory situations.
-trainFcn = 'trainbr';  % Levenberg-Marquardt backpropagation.
+fData = fopen('data/MFON_160101_180101_F.txt');
+if fData==-1
+    error('file does not exist');
+end
+while feof(fData) == 0
+    line = fgetl(fData);
+    data = str2num(line);
+end
 
-% Create a Nonlinear Autoregressive Network with External Input
-%inputDelays = 1:30;
-inputDelays = 1:3;
-feedbackDelays = 1:3;
-hiddenLayerSize = 30;
-net = narxnet(inputDelays,feedbackDelays,hiddenLayerSize,'open',trainFcn);
+%data preparation
+D = num2cell(data);
+X = D(1:4000);
+T = D(2:4001);
+X = X(1:1000);
+T = T(1:1000);
+dl = 2;
 
-% Prepare the Data for Training and Simulation
-% The function PREPARETS prepares timeseries data for a particular network,
-% shifting time by the minimum amount to fill input states and layer
-% states. Using PREPARETS allows you to keep your original time series data
-% unchanged, while easily customizing it for networks with differing
-% numbers of delays, with open loop or closed loop feedback modes.
-[x,xi,ai,t] = preparets(net,X,{},T);
-%[ed,ei,ci,w] = preparets(net,Y,{},D);
+%Creating network
+net = narxnet(1:dl,1:dl,50);
 
-% Setup Division of Data for Training, Validation, Testing
+net.trainParam.goal = 1e-10;
+net.trainParam.epochs = 1000000;
+net.trainParam.min_grad = 1e-10;
+net.trainParam.max_fail = 1000000;
+
 net.divideParam.trainRatio = 70/100;
 net.divideParam.valRatio = 15/100;
 net.divideParam.testRatio = 15/100;
 
-% Train the Network
-[net,tr] = train(net,x,t,xi,ai);
+net.performFcn = 'mse';  % Mean Squared Error
 
-% Test the Network
-y = net(x,xi,ai);
-prediction_of_test=net(ed,ei,ci); 
-e = gsubtract(t,y);
-performance = perform(net,t,y);
+%Train a network, and simulate it on the first observations
+[Xs,Xi,Ai,Ts] = preparets(net,X,{},T);
+net = train(net,Xs,Ts,Xi,Ai);
+
+%test network
+x1 = X(1:50);
+t1 = T(1:50);
+x2 = X(51:151);
+
+neto = openloop(net);
+[x,xi,ai,t] = preparets(net,x1,{},t1);
+[y1,xf,af] = net(x,xi,ai);
+
+[netc,xi,ai] = closeloop(net,xf,af);
+[y2,xf,af] = netc(x2,xi,ai);
+
+TS = size(y2,2);
+plot(1:TS,cell2mat(X(51:151)),'b',1:TS,cell2mat(y2),'r')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
