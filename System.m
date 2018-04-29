@@ -1,3 +1,5 @@
+addpath('tests','shewhart_map','shewhart_map/special_reasons','noramality_criterians','neural_network','data');
+
 data = LoadData();
 n = length(data);
 sl = 60;
