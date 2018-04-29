@@ -50,11 +50,10 @@ end
 function filebutton_Callback(hObject, eventdata, handles)
 filename = get(handles.fileedit, 'string');
 handles.data = LoadData();
-handles.n = length(handles.data);
+handles.n = lengrh(handles.d)
 guidata(hObject,handles);
 
 axes(handles.tsaxes);
-plot(handles.data);
 
 
 
@@ -86,25 +85,6 @@ end
 if handles.pc < 1
     handles.pc = 1;
 end
-
-Xj = handles.data(handles.ofs:handles.ofs-1+handles.sl);
-[st,preds,nsr] = ProcessTs(Xj,handles.pc,handles.sr,10);
-
-switch st
-    case 0
-        %plot(Xj);
-        TS = length(preds)-1;
-        plot(1:handles.n,handles.data,handles.ofs:handles.ofs+TS,preds);
-        msgbox('Ok','Success');
-    case 1
-        [counts, binCenters] = hist(Xj);
-        bar(binCenters, counts, 'BarWidth', 1);
-        msgbox('Not normal distribution','Error');
-    case 2
-        plot(Xj);
-        msgbox('Error in Shewhart maps','Error');
-end
-
 guidata(hObject,handles);
 
 
