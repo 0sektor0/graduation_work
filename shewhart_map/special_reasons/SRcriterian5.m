@@ -1,4 +1,10 @@
-function [is_true, num] = SRcriterian5(Xj, lcl, lA, uB, ucl)
+function [is_true, num] = SRcriterian5(map)
+    Xj = map.ts;
+    lcl = map.lcl;
+    lA = map.la;
+    uB = map.ub;
+    ucl = map.ucl;
+
     is_true = false;
     num = -1;
     n = length(Xj);

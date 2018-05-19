@@ -1,12 +1,17 @@
 data = LoadData();
-[X,T] = SplitData(data,10);
 n = length(data);
 
-y2 = Nio(X);
-TS = length(y2);
-
-sl = 60;
+sl = 100;
 ofs = 472;
 Xj = data(ofs:ofs-1+sl);
+%Xj = data;
 
-plot(1:499,y2(2:500),'r',1:499,T(1:499),'b');
+[X,R] = CreateIndScmParam(Xj, 0.01)
+
+for i = 1:8
+    [is_true, num] = CheckMap([i], X);
+    if is_true
+        disp("FAIL");
+        break
+    end
+end

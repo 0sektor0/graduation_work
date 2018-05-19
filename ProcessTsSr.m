@@ -27,7 +27,7 @@ if ~dist
     end
 end
 
-%shewharts map criterian check
+%создаем карты шухкарта
 [Xucl, Xcl, Xlcl, Rucl, Rcl, Rlcl] = ShewhartIndP(mean(Xj),0.01);
 [lA, lB, lC, uC, uB, uA] = CalcShBorders(Xucl,Xcl,Xlcl);
 
