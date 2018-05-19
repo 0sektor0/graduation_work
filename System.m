@@ -10,8 +10,8 @@ Xj = data(ofs:ofs-1+sl);
 
 
 sr = [];
-[st,preds,nsr] = ProcessTs(Xj,2000,sr,10);
-%[st,preds,nsr] = ProcessTs(Xj,20,nsr,10);
+[st,preds,nsr] = ProcessTsSr(Xj,2000,sr,10);
+[st,preds] = ProcessTs(Xj,20);
 
 TS = length(preds)-1;
 plot(ofs:ofs+TS,preds,1:n,data)
