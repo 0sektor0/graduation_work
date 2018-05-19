@@ -105,7 +105,8 @@ switch st.type
         msgbox(st.text,'Error');
     case 2
         plot(Xj);
-        handles.system_criterians = [nsr, handles.system_criterians];
+        handles.system_criterians = AddCriterian(handles.system_criterians, nsr);
+        msgbox(st.text,'Error');
 end
 
 guidata(hObject,handles);

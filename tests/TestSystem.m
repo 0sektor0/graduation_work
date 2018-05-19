@@ -36,44 +36,40 @@ end
 %###################%
 %расчет карт шухарта%
 %###################%
-%[Xucl, Xcl, Xlcl, Rucl, Rcl, Rlcl] = ShewhartInd(Xj);
-[Xucl, Xcl, Xlcl, Rucl, Rcl, Rlcl] = ShewhartIndP(mean(Xj),5);
+[X, R] = CreateIndScmParam(Xj, 0.01);
+%[X, R] = CreateIndScmParam(Xj, 5);
 
-n = length(Xj);
-YR = abs(Xj(1:n-1) - Xj(2:n));  %R карта
-YRcl = Rcl*ones(1, n-1);        %прямая средней линии R карты
-YRucl = Rucl*ones(1, n-1);      %прямая врехней линии R карты
-YRlcl = Rlcl*ones(1, n-1);      %пряиая нижней линии R карты
+%границы зон R карты
+rx = 1:R.size;
+rla = ones(1,R.size)*R.la;
+rlb = ones(1,R.size)*R.lb;
+rlc = ones(1,R.size)*R.lc;
+rua = ones(1,R.size)*R.ua;
+rub = ones(1,R.size)*R.ub;
+ruc = ones(1,R.size)*R.uc;
 
-YXcl = Xcl*ones(1, n);          %прямая средней линии X карты
-YXucl = Xucl*ones(1, n);
-YXlcl = Xlcl*ones(1, n);
+%границы зон X карты
+xx = 1:X.size;
+xla = ones(1,X.size)*X.la;
+xlb = ones(1,X.size)*X.lb;
+xlc = ones(1,X.size)*X.lc;
+xua = ones(1,X.size)*X.ua;
+xub = ones(1,X.size)*X.ub;
+xuc = ones(1,X.size)*X.uc;
 
-XR = 1 : 1 : n-1;               %X ось R карты
-XX = 1 : 1 : n;                 %X ось X карты
-    
 %R карта
 subplot(2,3,4);
-plot(XR, YR, XR, YRucl, XR, YRcl, XR, YRlcl);
-
-%X карта и линии
-[lA, lB, lC, uC, uB, uA] = CalcShBorders(Xucl,Xcl,Xlcl);
-lAY = lA * ones(1, n);
-lBY = lB * ones(1, n);
-lCY = lC * ones(1, n);
-uAY = uA * ones(1, n);
-uBY = uB * ones(1, n);
-uCY = uC * ones(1, n);
+plot(rx,rla, rx,rlb, rx,rlc, rx,rua, rx,rub, rx,ruc, rx,R.ts);
 
 %X карта
 subplot(2,3,6);
-plot(XX, Xj, XX, YXucl, XX, YXcl, XX, YXlcl, XX, lAY, XX, lBY, XX, uCY, XX, uBY);
+plot(xx,xla, xx,xlb, xx,xlc, xx,xua, xx,xub, xx,xuc, xx,X.ts);
 
 state = false;
 for i=1:8
-    i
-    [is_uc, num] = Check4SpecialResons(Xj, [floor(i)], Xlcl, lA, lB, lC, uC, uB, uA)
-    state = state || is_uc;
+    [error, position] = CheckMap(struct('type',i,'ts',[]), X);
+    disp(i + " " + error + " " + position);
+    state = state || error;
 end
 
 if state == true
