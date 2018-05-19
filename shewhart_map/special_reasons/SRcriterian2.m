@@ -1,4 +1,7 @@
-function [is_true, num] = SRcriterian2(Xj,cl)
+function [is_true, num] = SRcriterian2(map)
+    Xj = map.ts;
+    cl = map.cl;
+
     is_true = false;
     num = -1;
     n = length(Xj);

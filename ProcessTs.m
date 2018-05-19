@@ -1,3 +1,3 @@
 function [st,preds] = ProcessTs(Xj,pc)
-[st,preds] = ProcessTsSr(Xj,2000,[],0);
+[st,preds] = ProcessTsSr(Xj,pc,[],0);
 end

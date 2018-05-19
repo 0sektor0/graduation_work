@@ -1,5 +1,9 @@
-function [is_true, num] = SRcriterian3(Xj)
+function [is_true, num] = SRcriterian3(map)
+    Xj = map.ts;
+
     n = length(Xj);
+    is_true = false;
+    num = -1;
 
     for i = 1:n-6
         up_counter = 0;
@@ -18,9 +22,6 @@ function [is_true, num] = SRcriterian3(Xj)
             is_true = true;
             num = i;
             return
-        else 
-            is_true = false;
-            num = -1;
         end
     end
 end
