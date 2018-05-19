@@ -1,6 +1,6 @@
 function [is_true, num] = SRcriterian8(map)
     Xj = map.ts; 
-    lC = map.lc;
+    lC = map.lb;
     uC = map.uc;
 
     is_true = false;

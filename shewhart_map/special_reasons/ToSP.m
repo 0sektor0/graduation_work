@@ -1,25 +1,41 @@
-function Sp = ToSP(Xj, lcl, lA, lB, lC, uC, uB, uA)
+function newCriterian = ToSP(map, position, size)
+    start = position - size;
+    if start < 1
+        start = 1;
+    end
+
+    Xj = map.ts(start:position);
+    lcl = map.lcl;
+    lA = map.la; 
+    lB = map.lb;
+    lC = map.lc;
+    uC = map.uc;
+    uB = map.ub;
+    uA = map.ua;
+
     n = length(Xj);
-    Sp = zeros(1, n);
+    ts = zeros(1, n);
     
     for i=1:n
         if Xj(i) < lcl
-            Sp(1, i) = 0;
+            ts(1, i) = 0;
         elseif Xj(i) >= lcl && Xj(i) < lA
-            Sp(1, i) = 1;
+            ts(1, i) = 1;
         elseif Xj(i) >= lA && Xj(i) < lB
-            Sp(1,i) = 2;
+            ts(1,i) = 2;
         elseif Xj(i) >= lB && Xj(i) < lC
-            Sp(1,i) = 3;
+            ts(1,i) = 3;
         elseif Xj(i) >= lC && Xj(i) < uC
-            Sp(1,i) = 4;
+            ts(1,i) = 4;
         elseif Xj(i) >= uC && Xj(i) < uB
-            Sp(1,i) = 5;
+            ts(1,i) = 5;
         elseif Xj(i) >= uB && Xj(i) <= uA
-            Sp(1,i) = 6;
+            ts(1,i) = 6;
         elseif Xj(i) >= uA
-            Sp(1,i) = 7;
+            ts(1,i) = 7;
         end
     end
+
+    newCriterian = struct('type',-1,'ts',ts);
 end
 

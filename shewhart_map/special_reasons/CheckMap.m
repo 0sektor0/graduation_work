@@ -20,41 +20,40 @@ function [is_true, num] = CheckMap(sr, map)
     %проверка на стандартные критерии
     
     %одна точка вне зон А
-    if sr(1) == 1
+    if sr.type == 1
         [is_true, num] = SRcriterian1(map);
         
     %9 точек подряд в зоне С или по одну сторону от центральной линии
-    elseif sr(1) == 2
+    elseif sr.type == 2
         [is_true, num] = SRcriterian2(map);     
         
     %6 возрастающих или убывающих точек подряд
-    elseif sr(1) == 3
+    elseif sr.type == 3
         [is_true, num] = SRcriterian3(map);
                 
     %14 попеременно возрастающих или убывающих точек подряд
-    elseif sr(1) == 4
+    elseif sr.type == 4
         [is_true, num] = SRcriterian4(map);
         
     %2 из 3 последовательных точек в зоне А или вне ее
-    elseif sr(1) == 5
+    elseif sr.type == 5
         [is_true, num] = SRcriterian5(map);        
         
     %4 из 5 последовательных точек в В или вне ее
-    elseif sr(1) == 6
+    elseif sr.type == 6
         [is_true, num] = SRcriterian6(map);         
        
     %15 последовательных точек в зоне С выше или ниже центральной линии
-    elseif sr(1) == 7
+    elseif sr.type == 7
         [is_true, num] = SRcriterian7(map);
                 
     %8 последовательных точек по обеим сторонам центральной линии и ни
     %одной в зоне С
-    elseif sr(1) == 8
+    elseif sr.type == 8
         [is_true, num] = SRcriterian8(map);
         
     %проверка на особые критерии
     else
-        n = length(sr);
-        [is_true, num] = SPcriterian(map.ts, sr(2:n), map.lcl, map.la, map.lb, lC, map.uc, map.uB, map.uA);
+        [is_true, num] = SPcriterian(map.ts, sr.ts);
     %end
 end

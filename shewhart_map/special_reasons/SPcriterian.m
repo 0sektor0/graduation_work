@@ -1,4 +1,13 @@
-function [is_true, num] = SPcriterian(Xj, Sp, lcl, lA, lB, lC, uC, uB, uA)
+function [is_true, num] = SPcriterian(map, Sp)
+    Xj = map.ts;
+    lcl = map.lcl;
+    lA = map.la;
+    lB = map.lb;
+    lC = map.lc;
+    uC = map.uc; 
+    uB = map.ub; 
+    uA = map.ua;
+
     is_true = false;
     num = -1;
     
