@@ -65,16 +65,13 @@ else
 end
 
 
-
-function offsetedit_Callback(hObject, eventdata, handles)
-
-
 % --- Executes during object creation, after setting all properties.
 function offsetedit_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
 
+function offsetedit_Callback(hObject, eventdata, handles)
 
 
 function lenedit_Callback(hObject, eventdata, handles)
