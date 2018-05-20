@@ -1,6 +1,6 @@
 addpath('tests','shewhart_map','shewhart_map/special_reasons','noramality_criterians','neural_network','data','gui','system');
 
-data = LoadData();
+data = LoadData('data/MFON_160101_180101_F.txt');
 n = length(data);
 sl = 60;
 ofs = 472;

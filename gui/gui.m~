@@ -53,16 +53,13 @@ function filebutton_Callback(hObject, eventdata, handles)
 set(handles.criterianslistbox,'string',{});
 
 filename = get(handles.fileedit, 'string');
-if exist(filename)
-    handles.time_series = LoadData(filename);
-    handles.ts_size = length(handles.time_series);
-    guidata(hObject,handles);
 
-    axes(handles.tsaxes);
-    plot(handles.time_series);
-else 
-    msgbox('File dosent exist','Error');
-end
+handles.time_series = LoadData(filename);
+handles.ts_size = length(handles.time_series);
+guidata(hObject,handles);
+
+axes(handles.tsaxes);
+plot(handles.time_series);
 
 
 

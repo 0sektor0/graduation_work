@@ -1,14 +1,21 @@
-function [criterians] = AddCriterian(dest,criterian)
-if(criterian.type == -1)
-    for i = 1 : length(dest)
-        if criterian.ts == dest(i).ts
+function [criterians] = AddCriterian(dest,new_criterians)
+    n = length(new_criterians);
+    
+    for i = 1:n
+        if(new_criterians(i).type == -1)
+            for j = 1 : length(dest)
+                if length(new_criterians(i).ts) == length(dest(j).ts)
+                    if new_criterians(i).ts == dest(j).ts
+                        criterians = dest;
+                        return
+                    end
+                end
+            end
+            criterians = [dest, new_criterians(i)];
+        else
             criterians = dest;
-            return
         end
     end
-    criterians = [dest, criterian];
-else
-    criterians = dest;
-end
+    
 end
 

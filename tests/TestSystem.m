@@ -6,7 +6,7 @@ offset = 472;   %50 140
 %########################%
 %считываем временной ряд %
 %########################%
-data = LoadData();
+data = LoadData('data/MFON_160101_180101_F.txt');
 data_len = length(data);
 Xj = data(offset: offset+sl-1);
 
