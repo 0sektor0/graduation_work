@@ -1,5 +1,5 @@
-function [st,predictions,newSystemCriterians] = ProcessTsSr(Xj,predictionsCount,systemCriterians,criterianSize)
-st = 0;
+function [st,predictions,newSystemCriterians] = ProcessTsSr(Xj,predictionsCount,systemCriterians,criterianSize,sigma)
+st = struct('type',0,'text','ok');
 predictions = [];
 newSystemCriterians = [];
 
@@ -10,13 +10,13 @@ if ~dist
     dist = CheckNd(Xj);
     
     if ~dist
-        st = 1;
+        st = struct('type',1,'text','not normal distribution');
         return;
     end
 end
 
 %создаем карты шухкарта
-[X, R] = CreateIndScmParam(Xj, 0.01);
+[X, R] = CreateIndScmParam(Xj, sigma);
 state = false;
 
 %проверяем карту на 8 основных критериев
@@ -25,7 +25,10 @@ for j=1:8
     state = state || is_uc;
     
     if is_uc
-       newSystemCriterians = [newSystemCriterians, [ToSP(X, position, criterianSize)]];
+        newCriterian = [ToSP(X, position, criterianSize)];
+        if(newCriterian.type ~= 0)
+            newSystemCriterians = [newSystemCriterians, newCriterian];
+        end
     end
 end
 
@@ -39,7 +42,7 @@ end
 if ~state
     predictions = MakeNpredictions(Xj, predictionsCount);
 else
-    st = 2;
+    st = struct('type',2,'text','process unstable');
     return;
 end
 

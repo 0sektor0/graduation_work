@@ -1,6 +1,6 @@
 %параметры теста
-sl = 60;        %sample length 50 60
-offset = 472;   %50 140
+sl = 90;        %sample length 50 60
+offset = 352;   %50 140
 
 
 %########################%
@@ -75,23 +75,6 @@ end
 if state == true
     error("data can't be predicted")
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

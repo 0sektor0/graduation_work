@@ -10,7 +10,7 @@
 %результат: <1%
 
 wa = 0;     %wrong answers counter
-tc = 505;   %tests num
+tc = 700;   %tests num
 ts = 5;     %tests start value
 
 for i=ts:tc

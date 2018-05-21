@@ -54,6 +54,6 @@ function [is_true, num] = CheckMap(sr, map)
         
     %проверка на особые критерии
     else
-        [is_true, num] = SPcriterian(map.ts, sr.ts);
+        [is_true, num] = SPcriterian(map, sr);
     %end
 end

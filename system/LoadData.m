@@ -1,6 +1,6 @@
-function data = LoadData()
+function data = LoadData(filename)
 
-fData = fopen('data/MFON_160101_180101_F.txt');
+fData = fopen(filename);
 if fData==-1
     error('file does not exist');
 end

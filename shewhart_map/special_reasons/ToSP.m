@@ -1,7 +1,8 @@
 function newCriterian = ToSP(map, position, size)
-    start = position - size;
+    start = position - size + 1;
     if start < 1
-        start = 1;
+        newCriterian = struct('type',0,'ts',map.ts,'size',length(map.ts));
+        return
     end
 
     Xj = map.ts(start:position);
@@ -36,6 +37,6 @@ function newCriterian = ToSP(map, position, size)
         end
     end
 
-    newCriterian = struct('type',-1,'ts',ts);
+    newCriterian = struct('type',-1,'ts',ts,'size',length(ts));
 end
 
