@@ -6,12 +6,6 @@ if n < size+1
     error("size mismatch");
 end
 
-[Xj,Tj] = SplitData(input,10);
-input = Nio(Xj);
-n = length(input);
-%TS = length(R);
-%plot(1:TS-1,R(2:TS),'r',1:TS-1,Tj(1:TS-1),'b');
-
 input = input(n-size+1:n);
 prediction = zeros(1,pcount);
 

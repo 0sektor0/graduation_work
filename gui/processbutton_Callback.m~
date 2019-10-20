@@ -20,22 +20,22 @@ if handles.predictions_count < 1
 end
 
 Xj = handles.time_series(handles.sample_offset:handles.sample_offset-1+handles.sample_size);
-[state, preds, newCriterians] = ProcessTsSr(Xj, handles.predictions_count, handles.system_criterians, handles.sr_size, handles.sigma);
+[st,preds,nsr] = ProcessTsSr(Xj, handles.predictions_count, handles.system_criterians, handles.sr_size, handles.sigma);
 
-switch state.type
+switch st.type
     case 0
-        predictionsOffset = handles.sample_offset + handles.sample_size;
-        predictionsLastPoint = predictionsOffset + length(preds)-1;
-        plot(1:handles.ts_size, handles.time_series, predictionsOffset:predictionsLastPoint, preds);
-        msgbox(state.text,'Success');
+        TS = length(preds)-1;
+        predictionsOffset = handles.sample_offset + 
+        plot(1:handles.ts_size, handles.time_series, handles.sample_offset:handles.sample_offset+TS, preds);
+        msgbox(st.text,'Success');
     case 1
         [counts, binCenters] = hist(Xj);
         bar(binCenters, counts, 'BarWidth', 1);
-        msgbox(state.text,'Error');
+        msgbox(st.text,'Error');
     case 2
         plot(Xj);
-        handles.system_criterians = AddCriterian(handles.system_criterians, newCriterians);
-        msgbox(state.text,'Error');
+        handles.system_criterians = AddCriterian(handles.system_criterians, nsr);
+        msgbox(st.text,'Error');
 end
 
 new_str= num2cell(1 : length(handles.system_criterians));
