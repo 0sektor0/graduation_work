@@ -1,4 +1,4 @@
-D = LoadData('data/MFON_160101_180101_F.txt');
+D = LoadData('data/mfon-all.txt');
 
 T = D(300:800);
 net = narnet(1:10,10);
@@ -16,4 +16,5 @@ y2 = netc(cell(0,50),Xic,Aic)
 
 plot(1:551,D(300:850), 502:551,cell2mat(y2))
 
-save net
+trainedNarnet = net;
+save trainedNarnet;

@@ -1,4 +1,4 @@
-data = LoadData();
+data = LoadData('data/mfon-all.txt');
 D = num2cell(data);
 n = length(data);
 %data = data(2:n) - data(1:n-1);
